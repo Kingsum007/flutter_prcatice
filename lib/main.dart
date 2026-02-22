@@ -1009,6 +1009,7 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -1021,7 +1022,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: AlertBox(),
 
       // Scaffold(
       //   bottomNavigationBar: BottomNavigationBar(
@@ -1037,8 +1038,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyStateFul extends StatefulWidget {
+  const MyStateFul({super.key});
+
+  @override
+  State<MyStateFul> createState() => _MyStateFulState();
+}
+
+class _MyStateFulState extends State<MyStateFul> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -1066,12 +1081,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Bottom Navigation"),
-        backgroundColor: Color(0xFF34FFEA),
+        backgroundColor: Colors.indigo,
       ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFF34FFEA),
+        backgroundColor: Colors.indigo,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.white,
         items: [
@@ -1091,4 +1106,48 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+class AlertBox extends StatelessWidget {
+  const AlertBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            showAlertDialogue(context);
+          },
+          child: Text("Exit"),
+        ),
+      ),
+    );
+  }
+}
+
+void showAlertDialogue(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Exit App"),
+        content: Text("Are you sure you want to exit?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              SystemNavigator.pop();
+            },
+            child: Text("Ok"),
+          ),
+        ],
+      );
+    },
+  );
 }
