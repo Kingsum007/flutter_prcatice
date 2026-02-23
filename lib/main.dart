@@ -1022,7 +1022,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AlertBox(),
+      home: TableWidget(),
 
       // Scaffold(
       //   bottomNavigationBar: BottomNavigationBar(
@@ -1150,4 +1150,92 @@ void showAlertDialogue(BuildContext context) {
       );
     },
   );
+}
+
+class Contact {
+  final String name;
+  final String email;
+  final String phone;
+
+  Contact({required this.name, required this.email, required this.phone});
+}
+
+class TableWidget extends StatelessWidget {
+  TableWidget({super.key});
+
+  final List<Contact> contacts = [
+    Contact(name: 'Alice', email: 'alice@domain.com', phone: '1234567890'),
+    Contact(name: 'Bob', email: 'bob@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Alice', email: 'alice@domain.com', phone: '1234567890'),
+    Contact(name: 'Bob', email: 'bob@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Alice', email: 'alice@domain.com', phone: '1234567890'),
+    Contact(name: 'Bob', email: 'bob@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+    Contact(name: 'Charlie', email: 'charl@domain.com', phone: '1234567890'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Data Table"), backgroundColor: Colors.indigo),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: DataTable(
+          columns: [
+            DataColumn(label: Text("Name")),
+            DataColumn(label: Text("Email")),
+            DataColumn(label: Text("Phone")),
+          ],
+          rows: contacts.map((contact) {
+            return DataRow(
+              cells: [
+                DataCell(Text(contact.name)),
+                DataCell(Text(contact.email)),
+                DataCell(Text(contact.phone)),
+              ],
+            );
+          }).toList(),
+        ),
+        // child: Table(
+        //   border: TableBorder.all(),
+        //   columnWidths: <int, TableColumnWidth>{
+        //     0: FixedColumnWidth(100.0),
+        //     1: FlexColumnWidth(),
+        //     2: FixedColumnWidth(100.0),
+        //   },
+        //   children: [
+        //     TableRow(children: [Text("ID"), Text("Name"), Text("LastName")]),
+        //     TableRow(children: [Text("1"), Text("Ahmad"), Text("Ahmadi")]),
+        //     TableRow(children: [Text("2"), Text("Farooq"), Text("Farooqi")]),
+        //     TableRow(children: [Text("3"), Text("Dawood"), Text("Dawoodi")]),
+        //   ],
+        // ),
+      ),
+    );
+  }
 }
