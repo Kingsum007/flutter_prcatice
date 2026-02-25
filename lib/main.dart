@@ -1022,7 +1022,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TableWidget(),
+      home: SwitchWidget1(),
 
       // Scaffold(
       //   bottomNavigationBar: BottomNavigationBar(
@@ -1235,6 +1235,470 @@ class TableWidget extends StatelessWidget {
         //     TableRow(children: [Text("3"), Text("Dawood"), Text("Dawoodi")]),
         //   ],
         // ),
+      ),
+    );
+  }
+}
+
+// 24 Feb 2026
+class FormWidget extends StatelessWidget {
+  const FormWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Form in Flutter"),
+        backgroundColor: Colors.indigoAccent,
+      ),
+      body: Form(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text(' Name'),
+                  hint: Text("Please Enter Your  Name "),
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text("Last Name"),
+                  hint: Text("Please Enter Your Last Name "),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FormValidationWidget extends StatefulWidget {
+  const FormValidationWidget({super.key});
+
+  @override
+  State<FormValidationWidget> createState() => _FormValidationWidgetState();
+}
+
+class _FormValidationWidgetState extends State<FormValidationWidget> {
+  final _formKey = GlobalKey<FormState>();
+  bool isChecked = false;
+  var options = <String>['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  var selectedOptions = <String>[];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Form Validation")),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: ListView(
+            children: options.map((String option) {
+              return CheckboxListTile(
+                title: Text(option),
+                value: selectedOptions.contains(option),
+                onChanged: (bool? value) {
+                  setState(() {
+                    if (value == true) {
+                      selectedOptions.add(option);
+                      print(selectedOptions);
+                    } else {
+                      selectedOptions.remove(option);
+                      print(selectedOptions);
+                    }
+                  });
+                },
+              );
+            }).toList(),
+          ),
+          // Column(
+          //   children: [
+          //     TextFormField(
+          //       decoration: InputDecoration(
+          //         label: Text(' Name'),
+          //         hint: Text("Please Enter Your  Name "),
+          //       ),
+          //       inputFormatters: [
+          //         FilteringTextInputFormatter.digitsOnly,
+          //         LengthLimitingTextInputFormatter(10),
+          //       ],
+          //       validator: (value) {
+          //         if (value == "") {
+          //           return "Please Enter your name";
+          //         }
+          //         return null;
+          //       },
+          //     ),
+          //     SizedBox(height: 20),
+          //     TextFormField(
+          //       decoration: InputDecoration(
+          //         label: Text("Last Name"),
+          //         hint: Text("Please Enter Your Last Name "),
+          //       ),
+          //       validator: (value) {
+          //         if (value == "") {
+          //           return "Please Enter your last name";
+          //         }
+          //         return null;
+          //       },
+          //     ),
+          //     SizedBox(height: 20),
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         if (_formKey.currentState!.validate()) {}
+          //       },
+          //       child: Text("Submit"),
+          //     ),
+          //     Row(
+          //       children: [
+          //         Checkbox(
+          //           value: isChecked,
+          //           onChanged: (bool? value) {
+          //             setState(() {
+          //               isChecked = value!;
+          //             });
+          //           },
+          //           checkColor: Colors.green,
+          //           activeColor: Colors.blue,
+          //         ),
+          //         Text("I Agree"),
+          //       ],
+          //     ),
+          //
+          //   ],
+          // ),
+        ),
+      ),
+    );
+  }
+}
+
+class FormWidget1 extends StatelessWidget {
+  const FormWidget1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Forms")),
+      body: Form(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text("Name"),
+                  hint: Text("Enter Your Name"),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text("Last Name"),
+                  hint: Text("Enter Your Last Name"),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text("Password"),
+                  hint: Text("Enter Your Name"),
+                ),
+                obscureText: true,
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(onPressed: () {}, child: Text("Submit")),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MyValidatedForm extends StatefulWidget {
+  const MyValidatedForm({super.key});
+
+  @override
+  State<MyValidatedForm> createState() => _MyValidatedFormState();
+}
+
+class _MyValidatedFormState extends State<MyValidatedForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Validation")),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text("Name"),
+                  hint: Text("Enter Your Name"),
+                ),
+                validator: (value) {
+                  if (value == "" || value == null) {
+                    return "Please Enter Your Name";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text("Last Name"),
+                  hint: Text("Enter Your Last Name"),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                decoration: InputDecoration(
+                  label: Text("Password"),
+                  hint: Text("Enter Your Name"),
+                ),
+                obscureText: true,
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {}
+                },
+                child: Text("Submit"),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+enum Gender {
+  male("Male"),
+  female("Female"),
+  others("Others");
+
+  final String text;
+
+  const Gender(this.text);
+}
+
+class FormWidget2 extends StatefulWidget {
+  const FormWidget2({super.key});
+
+  @override
+  State<FormWidget2> createState() => _FormWidget2State();
+}
+
+class _FormWidget2State extends State<FormWidget2> {
+  Gender? _selectedOption = Gender.male;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Forms")),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Form(
+          child: Wrap(
+            children: Gender.values.map((option) {
+              return RadioListTile<Gender>(
+                value: option,
+                title: Text(option.text),
+                groupValue: _selectedOption,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedOption = value!;
+                  });
+                },
+              );
+            }).toList(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SwitchWidget extends StatefulWidget {
+  const SwitchWidget({super.key});
+
+  @override
+  State<SwitchWidget> createState() => _SwitchWidgetState();
+}
+
+class _SwitchWidgetState extends State<SwitchWidget> {
+  bool isSwitched = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Switch")),
+      body: Column(
+        children: [
+          Switch(
+            activeColor: Colors.green,
+            inactiveThumbColor: Colors.pink,
+            value: isSwitched,
+            onChanged: (value) {
+              setState(() {
+                isSwitched = value;
+              });
+            },
+          ),
+          Text("${isSwitched ? 'ON' : 'OFF'}", style: TextStyle(fontSize: 30)),
+        ],
+      ),
+    );
+  }
+}
+
+class DatePickerWidget extends StatefulWidget {
+  const DatePickerWidget({super.key});
+
+  @override
+  State<DatePickerWidget> createState() => _DatePickerWidgetState();
+}
+
+class _DatePickerWidgetState extends State<DatePickerWidget> {
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Select Date")),
+      body: Center(
+        child: Column(
+          children: [
+            Text(
+              ""
+              "Selected Date: ${selectedDate.toLocal().toString().split('')[0]}",
+            ),
+            SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                _selectDate(context);
+              },
+              child: Text("Select Your Birthday"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RadioWidget extends StatefulWidget {
+  const RadioWidget({super.key});
+
+  @override
+  State<RadioWidget> createState() => _RadioWidgetState();
+}
+
+class _RadioWidgetState extends State<RadioWidget> {
+  Gender? selectedOption = Gender.male;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Radio")),
+      body: Column(
+        children: Gender.values.map((option) {
+          return RadioListTile(
+            value: option,
+            title: Text(option.text),
+            groupValue: selectedOption,
+            onChanged: (value) {
+              setState(() {
+                selectedOption = value;
+              });
+            },
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+class SwitchWidget1 extends StatefulWidget {
+  const SwitchWidget1({super.key});
+
+  @override
+  State<SwitchWidget1> createState() => _SwitchWidget1State();
+}
+
+class _SwitchWidget1State extends State<SwitchWidget1> {
+  bool isSwitched = false;
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2099),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Switch")),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Switch(
+              activeColor: Colors.green,
+              inactiveThumbColor: Colors.red,
+              padding: EdgeInsets.all(16),
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  isSwitched = value;
+                });
+              },
+            ),
+            Text("${isSwitched ? "YES" : "NO"}"),
+            SizedBox(height: 30),
+            Text(
+              ""
+              "Selected Date: ${selectedDate.toLocal().toString().split('')[0]}",
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _selectDate(context);
+              },
+              child: Text("Select Date"),
+            ),
+          ],
+        ),
       ),
     );
   }
