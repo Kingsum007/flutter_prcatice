@@ -1670,6 +1670,11 @@ class _SwitchWidget1State extends State<SwitchWidget1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.large(
+        onPressed: () {},
+        backgroundColor: Colors.red,
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(title: Text("Switch")),
       body: Center(
         child: Column(
@@ -1691,12 +1696,86 @@ class _SwitchWidget1State extends State<SwitchWidget1> {
               ""
               "Selected Date: ${selectedDate.toLocal().toString().split('')[0]}",
             ),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: () {
                 _selectDate(context);
               },
-              child: Text("Select Date"),
+              icon: Icon(Icons.calendar_month),
+              label: Text("Select Date"),
             ),
+            MaterialButton(
+              onPressed: () {},
+              color: Colors.blue,
+              textColor: Colors.white,
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Icon(Icons.add), SizedBox(width: 20), Text("Add")],
+              ),
+            ),
+            SizedBox(height: 18),
+            MaterialButton(
+              onPressed: () {},
+
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
+              child: Ink(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF34eaFF),
+                      Color(0xEEFFEA12),
+                      Color(0xFF34eaFF),
+                      Color(0xFFFEEF12),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+                child: Container(
+                  constraints: BoxConstraints(minWidth: 88.0, minHeight: 36.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Gradient Button",
+                    style: TextStyle(fontSize: 36.0, color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 18),
+            ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Colors.green),
+                textStyle: WidgetStateProperty.all(
+                  TextStyle(fontSize: 24.0, color: Colors.white),
+                ),
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+              ),
+
+              child: Text("Styled Button"),
+            ),
+            SizedBox(height: 18),
+            IconButton.outlined(onPressed: () {}, icon: Icon(Icons.add)),
+            SizedBox(height: 18),
+            OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.red, width: 2),
+                textStyle: TextStyle(fontSize: 25.0, color: Colors.black),
+              ),
+              child: Text("Outlined Button"),
+            ),
+            SizedBox(height: 18),
+            TextButton(onPressed: () {}, child: Text("Text Button")),
           ],
         ),
       ),
