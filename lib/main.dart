@@ -1012,7 +1012,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(DefaultScreen());
 }
 
 class MyApp extends StatelessWidget {
@@ -1779,6 +1779,78 @@ class _SwitchWidget1State extends State<SwitchWidget1> {
           ],
         ),
       ),
+    );
+  }
+}
+
+// final GoRouter _goRouter = GoRouter(
+//   routes: <RouteBase>[
+//     GoRoute(
+//       path: '/',
+//       builder: (BuildContext context, GoRouterState state) {
+//         return HomeScreen();
+//       },
+//     ),
+//     GoRoute(
+//       path: 'second',
+//       builder: (BuildContext context, GoRouterState state) {
+//         return SecondScreen();
+//       },
+//     ),
+//   ],
+// );
+
+class DefaultScreen extends StatelessWidget {
+  DefaultScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // return MaterialApp.router(routerConfig: _goRouter);
+    return MaterialApp(home: HomeScreen());
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  HomeScreen({Key? key}) : super(key: key);
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Navigator")),
+      body: Center(
+        child: Column(
+          children: [
+            Text("First Screen", style: TextStyle(fontSize: 36)),
+            TextField(controller: _controller),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SecondScreen(title: _controller.text),
+                  ),
+                );
+                // context.go('/second');
+              },
+              child: Text("Goto Second Screen"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  String title;
+
+  SecondScreen({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Second Screen")),
+      body: Center(child: Column(children: [Text("Second Screen $title")])),
     );
   }
 }
